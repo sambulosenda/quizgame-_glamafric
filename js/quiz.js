@@ -2,7 +2,7 @@
 //[img, correct Answer #, Option 1, Option 2, Option 3, Option 4]
 
 var questions = [
-    
+
 	 ['img/1.png', '2', "RIGHT", "LEFT" ,"BOTH", "MAYBE" , "Are you left or right handed ?"]
     
     , ['img/2.jpg', '2', "A shade lighter than your skin", "Two shades lighter than your skin", "Three shades lighter than your skin", "The Same Skin Tone", "Which shade of concealer best hides dark circles under your eyes?" , "image number 2"]
@@ -26,6 +26,8 @@ var corectAnswer = 0;
 var answer = '';
 var stringquestion = '';
 
+
+
 function NextQuestion(response) {
     correctAnswer = questions[qNo][1];
     var temp = parseInt(correctAnswer, 10) + 1;
@@ -41,7 +43,9 @@ function NextQuestion(response) {
         document.getElementById('Pic').src = questions[qNo][0];
         cnt++;
         UpdateOptions();
-    } else {
+    } else
+    
+     {
         //Quiz is finished
         //Remove Button and Image Elements
         finishModal(correct, qNo);
@@ -77,10 +81,6 @@ function calculateOpinion(correct, total){
         return ("Oh you must think you're cool now. Great Job!");
     }
 }
-
-
-
-
 
 function finishModal(correctScore, totalQuestions) {
    window.open("result.html","_self");
