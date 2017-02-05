@@ -27,7 +27,6 @@ var answer = '';
 var stringquestion = '';
 
 
-
 function NextQuestion(response) {
     correctAnswer = questions[qNo][1];
     var temp = parseInt(correctAnswer, 10) + 1;
@@ -39,18 +38,19 @@ function NextQuestion(response) {
     }
     qNo++;
 
+
     if (qNo < questions.length) {
         document.getElementById('Pic').src = questions[qNo][0];
         cnt++;
         UpdateOptions();
-    } else
-    
+    } else 
      {
         //Quiz is finished
         //Remove Button and Image Elements
         finishModal(correct, qNo);
     }
 }
+
  
 function UpdateOptions() {
     document.getElementById('qNo').innerHTML =  questions[qNo][6]  ; 
@@ -60,6 +60,12 @@ function UpdateOptions() {
     document.getElementById('opt4').innerHTML = questions[qNo][5];
 }
 
+function goodpicture()
+{
+    document.getElementById('opt2').innerHTML = questions[qNo][3];
+
+}
+
 
 function calculateOpinion(correct, total){
     var frac = (correct/total);
@@ -67,24 +73,31 @@ function calculateOpinion(correct, total){
     var threshold = 0.50;
     var upperThreshold = 0.90;
 
+
     if(correct == 0 && total > 0)
     {
         return('Are you kidding me? Not even a single one correct');
     }
     if((frac <= threshold) && frac > lowerThreshold){
         return ('How about you study up on your cars...');
+        window.open("result.html","_self"); 
     }
     if(frac >= threshold && frac < upperThreshold){
         return ('Maybe this test was a little too easy.');
+         window.open("result.html","_self");
     }
     if(frac >= upperThreshold){
         return ("Oh you must think you're cool now. Great Job!");
+         window.open("result.html","_self");
     }
 }
 
-function finishModal(correctScore, totalQuestions) {
-   window.open("result.html","_self");
-    $(".modal-body").text('You got ' + correctScore + ' out of ' + totalQuestions);
+
+
+function finishModal(correctScore, totalQuestions, goodpicture) {
+  // window.open("result.html","_self");
+    $('#myModal').modal('show');
+    $(".modal-body").text('You got ' + correctScore + ' out of ' + totalQuestions  );
     $(".modal-body-2").text(calculateOpinion(correctScore, totalQuestions));
     ev.preventDefault();
 }
